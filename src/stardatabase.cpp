@@ -26,6 +26,8 @@ void StarDatabase::clear()
 {
     //*this = StarDatabase();
     starDatas.clear();
+    namedStars.clear();
+    starsNames.clear();
 }
 
 bool StarDatabase::load()

@@ -71,7 +71,7 @@ QDataStream &operator>>(QDataStream &stream, StarFile::DataElement &d)
     return stream >> d.mName >> d.mSize >> d.mType >> d.mScale;
 }
 
-QDataStream &operator>>(QDataStream &stream, QMap<QString, StarFile::DataElement> &d)
+QDataStream &operator>>(QDataStream &stream, QHash<QString, StarFile::DataElement> &d)
 {
     quint16 count;
     stream >> count;
@@ -79,7 +79,7 @@ QDataStream &operator>>(QDataStream &stream, QMap<QString, StarFile::DataElement
     {
         StarFile::DataElement dataElement;
         stream >> dataElement;
-        d[dataElement.name()] = dataElement;
+        d.insert(dataElement.name(), dataElement);
     }
     return stream;
 }
@@ -89,7 +89,7 @@ QDataStream &operator<<(QDataStream &stream, const StarFile::DataElement &d)
     return stream << d.mName << d.mSize << d.mType << d.mScale;
 }
 
-QDataStream &operator<<(QDataStream &stream, const QVector<StarFile::DataElement> &d)
+QDataStream &operator<<(QDataStream &stream, const QHash<QString, StarFile::DataElement> &d)
 {
     stream << quint16(d.size());
     for (const auto &it: d)
@@ -188,6 +188,11 @@ int StarFile::version() const
 StarFile::DataElement &StarFile::element(const QString &key)
 {
     return mDataElements[key];
+}
+
+void StarFile::clear()
+{
+    *this = StarFile();
 }
 
 void StarFile::setDescription(const QString &description)
