@@ -75,6 +75,11 @@ QString StarData::specType() const
     return data.spec_type;
 }
 
+quint8 StarData::flags() const
+{
+    return data.flags;
+}
+
 QString StarData::toString(double value, const QVector<QChar> &symbols)
 {
     QStringList result;
@@ -212,6 +217,12 @@ bool StarData::setParallax(double value)
 bool StarData::setSpecType(const QByteArray &value)
 {
     data.spec_type = value;
+    return true;
+}
+
+bool StarData::setFlags(quint8 value)
+{
+    data.flags = value;
     return true;
 }
 

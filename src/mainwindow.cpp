@@ -71,9 +71,9 @@ void MainWindow::load()
         ui->tableWidget->setItem(row, 4, new QTableWidgetItem(QString::number(it.pmDec())));
         ui->tableWidget->setItem(row, 5, new QTableWidgetItem(QString::number(it.parallax())));
 
-        ui->tableWidget->setItem(row, 6, new QTableWidgetItem(QString::number(it.data.bv_index)));
+        ui->tableWidget->setItem(row, 6, new QTableWidgetItem(QString::number(it.bvIndex())));
         ui->tableWidget->setItem(row, 7, new QTableWidgetItem(it.specType()));
-        ui->tableWidget->setItem(row, 8, new QTableWidgetItem(QString::number(it.data.flags)));
+        ui->tableWidget->setItem(row, 8, new QTableWidgetItem(QString::number(it.flags())));
 
         ui->tableWidget->setItem(row, 9, new QTableWidgetItem(it.bayerName()));
         ui->tableWidget->setItem(row, 10, new QTableWidgetItem(it.longName()));

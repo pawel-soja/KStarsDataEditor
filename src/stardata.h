@@ -21,6 +21,7 @@ public:
     double parallax() const;
 
     QString specType() const;
+    quint8 flags() const;
 
 public:
     QString raAsString() const;
@@ -48,6 +49,8 @@ public:
 
     bool setParallax(double value);
     bool setSpecType(const QByteArray &value);
+
+    bool setFlags(quint8 value);
 
 public:
     double raScale() const;
@@ -95,7 +98,7 @@ public:
     Data::StarName &rawName();
     Data::StarName rawName() const;
 
-public: // TODO
+protected:
     Data data;
 };
 
