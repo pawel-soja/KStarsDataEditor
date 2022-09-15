@@ -9,13 +9,11 @@ public:
     QString longName() const;
     QString bayerName() const;
 
-    bool isNamedStar() const;
-    // Multiplicity = stardata->flags & 0x02;
-    // Variability  = stardata->flags & 0x04;
     double ra() const;
     double dec() const;
 
     double mag() const;
+    double bvIndex() const;
 
     double pmRa() const;
     double pmDec() const;
@@ -24,8 +22,13 @@ public:
 
     QString specType() const;
 
+public:
     QString raAsString() const;
     QString decAsString() const;
+
+    bool isNamedStar() const;
+    bool isMultiplicity() const;
+    bool isVariability() const;
 
 public:
     void setLongName(const QString &name);
@@ -36,6 +39,24 @@ public:
 
     bool setDec(double value);
     bool setDec(const QString &value);
+
+    bool setMag(double value);
+    bool setBvIndex(double value);
+
+    bool setPmRa(double value);
+    bool setPmDec(double value);
+
+    bool setParallax(double value);
+    bool setSpecType(const QByteArray &value);
+
+public:
+    double raScale() const;
+    double decScale() const;
+    double magScale() const;
+    double bvIndexScale() const;
+    double pmRaScale() const;
+    double pmDecScale() const;
+    double parallaxScale() const;
 
 public:
     static QString toString(double value, const QVector<QChar> &symbols = {0x00b0, '\'', '"'});
@@ -77,3 +98,4 @@ public:
 public: // TODO
     Data data;
 };
+

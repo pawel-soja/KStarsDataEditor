@@ -25,34 +25,49 @@ bool StarData::isNamedStar() const
     return data.flags & 0x01;
 }
 
+bool StarData::isMultiplicity() const
+{
+    return data.flags & 0x02;
+}
+
+bool StarData::isVariability() const
+{
+    return data.flags & 0x04;
+}
+
 double StarData::ra() const
 {
-    return data.RA / 1e6;
+    return data.RA / raScale();
 }
 
 double StarData::dec() const
 {
-    return data.Dec / 1e5;
+    return data.Dec / decScale();
 }
 
 double StarData::mag() const
 {
-    return data.mag / 100.0;
+    return data.mag / magScale();
+}
+
+double StarData::bvIndex() const
+{
+    return data.bv_index / bvIndexScale();
 }
 
 double StarData::pmRa() const
 {
-    return data.dRA / 10.0;
+    return data.dRA / pmRaScale();
 }
 
 double StarData::pmDec() const
 {
-    return data.dDec / 10.0;
+    return data.dDec / pmDecScale();
 }
 
 double StarData::parallax() const
 {
-    return data.parallax / 10.0;
+    return data.parallax / parallaxScale();
 }
 
 QString StarData::specType() const
@@ -149,7 +164,7 @@ bool StarData::setRa(const QString &value)
 
 bool StarData::setDec(double value)
 {
-    data.Dec = value * 1e5;
+    data.Dec = value * decScale();
     return true;
 }
 
@@ -162,6 +177,77 @@ bool StarData::setDec(const QString &value)
         setDec(v);
     }
     return ok;
+}
+
+bool StarData::setMag(double value)
+{
+    data.mag = value * magScale();
+    return true;
+}
+
+bool StarData::setBvIndex(double value)
+{
+    data.bv_index = value * bvIndexScale();
+    return true;
+}
+
+bool StarData::setPmRa(double value)
+{
+    data.dRA = value * pmRaScale();
+    return true;
+}
+
+bool StarData::setPmDec(double value)
+{
+    data.dDec = value * pmDecScale();
+    return true;
+}
+
+bool StarData::setParallax(double value)
+{
+    data.parallax = value * parallaxScale();
+    return true;
+}
+
+bool StarData::setSpecType(const QByteArray &value)
+{
+    data.spec_type = value;
+    return true;
+}
+
+double StarData::raScale() const
+{
+    return 1e6;
+}
+
+double StarData::decScale() const
+{
+    return 1e5;
+}
+
+double StarData::magScale() const
+{
+    return 100;
+}
+
+double StarData::bvIndexScale() const
+{
+    return 100;
+}
+
+double StarData::pmRaScale() const
+{
+    return 10;
+}
+
+double StarData::pmDecScale() const
+{
+    return 10;
+}
+
+double StarData::parallaxScale() const
+{
+    return 10;
 }
 
 QDataStream &operator>>(QDataStream &stream, StarData &d)

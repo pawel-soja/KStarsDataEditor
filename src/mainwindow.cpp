@@ -156,5 +156,4 @@ void MainWindow::on_lineEdit_textChanged(const QString &arg1)
         }
 
     }
-    //ui->tableWidget->show
 }

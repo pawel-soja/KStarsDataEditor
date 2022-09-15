@@ -5,7 +5,6 @@ QDataStream &operator>>(QDataStream &stream, StarFile::Header &d)
 {
     // Read the first 124 bytes of the binary file which contains a general text about the binary data.
     // e.g. "KStars Star Data v1.0. To be read using the 32-bit StarData structure only"
-    //d.description = stream.device()->read(124);
     stream >> d.description;
 
     // Find out endianess from reading "KS" 0x4B53 in the binary file which was encoded on a little endian machine
