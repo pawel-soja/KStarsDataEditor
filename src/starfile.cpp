@@ -1,5 +1,4 @@
 #include "starfile.h"
-#include "qt_stream.h"
 #include <QDebug>
 
 QDataStream &operator>>(QDataStream &stream, StarFile::Header &d)

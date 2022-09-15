@@ -1,5 +1,4 @@
 #include "stardata.h"
-#include "qt_stream.h"
 
 QString StarData::longName() const
 {

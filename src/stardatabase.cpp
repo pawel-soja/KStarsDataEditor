@@ -1,5 +1,4 @@
 #include "stardatabase.h"
-#include "qt_stream.h"
 #include <QFile>
 #include <QDebug>
 
