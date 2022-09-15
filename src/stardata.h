@@ -3,8 +3,12 @@
 #include "fixstr.h"
 #include <QDataStream>
 
-struct StarData
+class StarDatabase;
+class StarData
 {
+public:
+    explicit StarData(StarDatabase *db);
+
 public:
     QString longName() const;
     QString bayerName() const;
@@ -99,6 +103,7 @@ public:
     Data::StarName rawName() const;
 
 protected:
+    StarDatabase *mStarDatabase;
     Data data;
 };
 

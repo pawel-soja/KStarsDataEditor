@@ -53,7 +53,7 @@ bool StarDatabase::load()
 
     while(!namedStarsStream.atEnd())
     {
-        StarData star;
+        StarData star(this);
         namedStarsStream >> star;
         if (star.isNamedStar())
         {

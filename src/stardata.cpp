@@ -1,4 +1,9 @@
 #include "stardata.h"
+#include "stardatabase.h"
+
+StarData::StarData(StarDatabase *db)
+    : mStarDatabase(db)
+{ }
 
 QString StarData::longName() const
 {
@@ -230,37 +235,79 @@ bool StarData::setFlags(quint8 value)
 
 double StarData::raScale() const
 {
-    return 1e6;
+    StarFile::DataElement &element = mStarDatabase->namedStars.element("RA");
+    if (element.scale() == 0)
+    {
+        qWarning("Invalid RA scale, set to 1e6");
+        element.setScale(1e6);
+    }
+    return element.scale();
 }
 
 double StarData::decScale() const
 {
-    return 1e5;
+    StarFile::DataElement &element = mStarDatabase->namedStars.element("Dec");
+    if (element.scale() == 0)
+    {
+        qWarning("Invalid Dec scale, set to 1e5");
+        element.setScale(1e5);
+    }
+    return element.scale();
 }
 
 double StarData::magScale() const
 {
-    return 100;
+    StarFile::DataElement &element = mStarDatabase->namedStars.element("mag");
+    if (element.scale() == 0)
+    {
+        qWarning("Invalid mag scale, set to 100");
+        element.setScale(100);
+    }
+    return element.scale();
 }
 
 double StarData::bvIndexScale() const
 {
-    return 100;
+    StarFile::DataElement &element = mStarDatabase->namedStars.element("bv_index");
+    if (element.scale() == 0)
+    {
+        qWarning("Invalid bv_index scale, set to 100");
+        element.setScale(100);
+    }
+    return element.scale();
 }
 
 double StarData::pmRaScale() const
 {
-    return 10;
+    StarFile::DataElement &element = mStarDatabase->namedStars.element("dRA");
+    if (element.scale() == 0)
+    {
+        qWarning("Invalid dRA scale, set to 10");
+        element.setScale(10);
+    }
+    return element.scale();
 }
 
 double StarData::pmDecScale() const
 {
-    return 10;
+    StarFile::DataElement &element = mStarDatabase->namedStars.element("dDec");
+    if (element.scale() == 0)
+    {
+        qWarning("Invalid dDec scale, set to 10");
+        element.setScale(10);
+    }
+    return element.scale();
 }
 
 double StarData::parallaxScale() const
 {
-    return 10;
+    StarFile::DataElement &element = mStarDatabase->namedStars.element("parallax");
+    if (element.scale() == 0)
+    {
+        qWarning("Invalid parallax scale, set to 10");
+        element.setScale(10);
+    }
+    return element.scale();
 }
 
 QDataStream &operator>>(QDataStream &stream, StarData &d)

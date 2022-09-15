@@ -4,6 +4,7 @@
 
 #include <QByteArray>
 #include <QDataStream>
+#include <QMap>
 
 class StarFile
 {
@@ -76,6 +77,8 @@ public:
     QString description() const;
     int version() const;
 
+    DataElement &element(const QString &key);
+
 public:
     void setDescription(const QString &description);
     void setVersion(int version);
@@ -87,7 +90,7 @@ public:
 public:
     Header mHeader;
 
-    QVector<DataElement> mDataElements;
+    QMap<QString, DataElement> mDataElements;
     QVector<IndexEntry> mIndexEntries;
 
     // File offsets
