@@ -1,5 +1,7 @@
 #pragma once
 
+#include "fixstr.h"
+
 #include <QByteArray>
 #include <QDataStream>
 
@@ -8,7 +10,7 @@ class StarFile
 public:
     struct Header
     {
-        quint8 description[124] = "";
+        fixstr<124> description = {0};
         bool byteSwap = true;
         quint8 version = 0;
 
@@ -39,7 +41,7 @@ public:
         friend QDataStream &operator<<(QDataStream &stream, const QVector<DataElement> &d);
 
     protected:
-        quint8 mName[10] = "";  /**< Field name (eg. RA) */
+        fixstr<10> mName = {0}; /**< Field name (eg. RA) */
         qint8  mSize  { 0 };    /**< Field size in bytes (eg. 4) */
         quint8 mType  { 0 };
         qint32 mScale { 0 };    /**< Field scale. The final field value = raw_value * scale */

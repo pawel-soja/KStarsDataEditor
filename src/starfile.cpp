@@ -30,7 +30,7 @@ QDataStream &operator<<(QDataStream &stream, const StarFile::Header &d)
 
 QString StarFile::DataElement::name() const
 {
-    return QByteArray((const char*)mName, sizeof mName);
+    return mName;
 }
 
 qint8 StarFile::DataElement::size() const
@@ -50,7 +50,7 @@ qint32 StarFile::DataElement::scale() const
 
 void StarFile::DataElement::setName(const QString &name)
 {
-    qstrncpy((char *)mName, name.toLatin1().constData(), sizeof mName);
+    mName = name;
 }
 
 void StarFile::DataElement::setSize(qint8 value)
@@ -178,7 +178,7 @@ QDataStream &operator<<(QDataStream &stream, const StarFile &starFile)
 
 QString StarFile::description() const
 {
-    return QByteArray((const char*)mHeader.description, sizeof mHeader.description);
+    return mHeader.description;
 }
 
 int StarFile::version() const
@@ -188,7 +188,7 @@ int StarFile::version() const
 
 void StarFile::setDescription(const QString &description)
 {
-    qstrncpy((char *)mHeader.description, description.toLatin1().constData(), sizeof mHeader.description);
+    mHeader.description = description;
 }
 
 void StarFile::setVersion(int version)

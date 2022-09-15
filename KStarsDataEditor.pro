@@ -16,11 +16,11 @@ SOURCES += \
     src/starfile.cpp
 
 HEADERS += \
+    src/fixstr.h \
     src/mainwindow.h \
     src/stardata.h \
     src/stardatabase.h \
-    src/starfile.h \
-    src/qt_stream.h
+    src/starfile.h
 
 FORMS += \
     src/mainwindow.ui

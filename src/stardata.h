@@ -1,6 +1,8 @@
 #pragma once
 
+#include "fixstr.h"
 #include <QDataStream>
+
 struct StarData
 {
 public:
@@ -54,14 +56,14 @@ public:
         qint32 HD { 0 };  /**< unsigned 32-bit Henry Draper Index. No scaling is required. */
         qint16 mag { 0 }; /**< signed 16-bit raw magnitude. Needs to be divided by the scale (1e2) */
         qint16 bv_index { 0 };
-        quint8 spec_type[2];
+        fixstr<2> spec_type;
         quint8 flags { 0 };
         quint8 unused { 0 };
 
         struct StarName
         {
-            quint8 bayerName[8];
-            quint8 longName[32];
+            fixstr<8> bayerName;
+            fixstr<32> longName;
 
             friend QDataStream &operator>>(QDataStream &stream, StarName &d);
             friend QDataStream &operator<<(QDataStream &stream, const StarName &d);

@@ -3,12 +3,12 @@
 
 QString StarData::longName() const
 {
-    return QByteArray((const char*)data.starName.longName, sizeof data.starName.longName);
+    return data.starName.longName;
 }
 
 QString StarData::bayerName() const
 {
-    return QByteArray((const char *)data.starName.bayerName, sizeof data.starName.bayerName);
+    return data.starName.bayerName;
 }
 
 StarData::Data::StarName StarData::rawName() const
@@ -58,7 +58,7 @@ double StarData::parallax() const
 
 QString StarData::specType() const
 {
-    return QByteArray((const char*)data.spec_type, sizeof data.spec_type);
+    return data.spec_type;
 }
 
 QString StarData::toString(double value, const QVector<QChar> &symbols)
@@ -123,12 +123,12 @@ QString StarData::decAsString() const
 
 void StarData::setLongName(const QString &name)
 {
-    qstrncpy((char *)data.starName.longName, name.toLatin1().constData(), sizeof data.starName.longName);
+    data.starName.longName = name;
 }
 
 void StarData::setBayerName(const QString &name)
 {
-    qstrncpy((char *)data.starName.bayerName, name.toLatin1().constData(), sizeof data.starName.longName);
+    data.starName.bayerName = name;
 }
 
 bool StarData::setRa(double value)
