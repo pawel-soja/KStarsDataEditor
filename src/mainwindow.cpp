@@ -64,19 +64,19 @@ void MainWindow::load()
     for (const auto &it: starDatabase.starDatas)
     {
 
-        ui->tableWidget->setItem(row, 0, new QTableWidgetItem(it.raAsString()));
-        ui->tableWidget->setItem(row, 1, new QTableWidgetItem(it.decAsString()));
-        ui->tableWidget->setItem(row, 2, new QTableWidgetItem(QString::number(it.mag())));
-        ui->tableWidget->setItem(row, 3, new QTableWidgetItem(QString::number(it.pmRa())));
-        ui->tableWidget->setItem(row, 4, new QTableWidgetItem(QString::number(it.pmDec())));
-        ui->tableWidget->setItem(row, 5, new QTableWidgetItem(QString::number(it.parallax())));
+        ui->tableWidget->setItem(row, 0, new QTableWidgetItem(it.raAsString(), row));
+        ui->tableWidget->setItem(row, 1, new QTableWidgetItem(it.decAsString(), row));
+        ui->tableWidget->setItem(row, 2, new QTableWidgetItem(QString::number(it.mag()), row));
+        ui->tableWidget->setItem(row, 3, new QTableWidgetItem(QString::number(it.pmRa()), row));
+        ui->tableWidget->setItem(row, 4, new QTableWidgetItem(QString::number(it.pmDec()), row));
+        ui->tableWidget->setItem(row, 5, new QTableWidgetItem(QString::number(it.parallax()), row));
 
-        ui->tableWidget->setItem(row, 6, new QTableWidgetItem(QString::number(it.bvIndex())));
-        ui->tableWidget->setItem(row, 7, new QTableWidgetItem(it.specType()));
-        ui->tableWidget->setItem(row, 8, new QTableWidgetItem(QString::number(it.flags())));
+        ui->tableWidget->setItem(row, 6, new QTableWidgetItem(QString::number(it.bvIndex()), row));
+        ui->tableWidget->setItem(row, 7, new QTableWidgetItem(it.specType(), row));
+        ui->tableWidget->setItem(row, 8, new QTableWidgetItem(QString::number(it.flags()), row));
 
-        ui->tableWidget->setItem(row, 9, new QTableWidgetItem(it.bayerName()));
-        ui->tableWidget->setItem(row, 10, new QTableWidgetItem(it.longName()));
+        ui->tableWidget->setItem(row, 9, new QTableWidgetItem(it.bayerName(), row));
+        ui->tableWidget->setItem(row, 10, new QTableWidgetItem(it.longName(), row));
         row++;
     }
     ui->tableWidget->blockSignals(false);
@@ -85,10 +85,10 @@ void MainWindow::load()
     row = 0;
     for (const auto &it: starDatabase.namedStars.mDataElements)
     {
-        ui->namedStarsDataElement->setItem(row, 0, new QTableWidgetItem(it.name()));
-        ui->namedStarsDataElement->setItem(row, 1, new QTableWidgetItem(QString::number(it.size())));
-        ui->namedStarsDataElement->setItem(row, 2, new QTableWidgetItem(QString::number(it.type())));
-        ui->namedStarsDataElement->setItem(row, 3, new QTableWidgetItem(QString::number(it.scale())));
+        ui->namedStarsDataElement->setItem(row, 0, new QTableWidgetItem(it.name(), row));
+        ui->namedStarsDataElement->setItem(row, 1, new QTableWidgetItem(QString::number(it.size()), row));
+        ui->namedStarsDataElement->setItem(row, 2, new QTableWidgetItem(QString::number(it.type()), row));
+        ui->namedStarsDataElement->setItem(row, 3, new QTableWidgetItem(QString::number(it.scale()), row));
         row++;
     }
 
@@ -96,16 +96,16 @@ void MainWindow::load()
     row = 0;
     for (const auto &it: starDatabase.namedStars.mIndexEntries)
     {
-        ui->namedStarsEntry->setItem(row, 0, new QTableWidgetItem(QString::number(it.id())));
-        ui->namedStarsEntry->setItem(row, 1, new QTableWidgetItem(QString::number(it.offset())));
-        ui->namedStarsEntry->setItem(row, 2, new QTableWidgetItem(QString::number(it.count())));
+        ui->namedStarsEntry->setItem(row, 0, new QTableWidgetItem(QString::number(it.id()), row));
+        ui->namedStarsEntry->setItem(row, 1, new QTableWidgetItem(QString::number(it.offset()), row));
+        ui->namedStarsEntry->setItem(row, 2, new QTableWidgetItem(QString::number(it.count()), row));
         row++;
     }
 }
 
 void MainWindow::on_tableWidget_itemChanged(QTableWidgetItem *item)
 {
-    int row = item->row();
+    int row = item->type();
     bool changed = false;
     auto &star = starDatabase.starDatas[row];
     switch(item->column())
