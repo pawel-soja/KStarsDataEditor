@@ -42,7 +42,7 @@
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
-        <string>Named Stars Header</string>
+        <string>Named Stars Header (ReadOnly)</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
@@ -61,6 +61,9 @@
              <width>61</width>
              <height>27</height>
             </rect>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
            </property>
           </widget>
           <widget class="QLabel" name="label_2">
@@ -104,6 +107,9 @@
              <height>26</height>
             </rect>
            </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
           </widget>
          </widget>
         </item>
@@ -114,7 +120,7 @@
       </widget>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
-        <string>Named Stars Entry</string>
+        <string>Named Stars Entry (ReadOnly)</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>

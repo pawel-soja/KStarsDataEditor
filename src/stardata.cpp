@@ -140,14 +140,16 @@ QString StarData::decAsString() const
     return toString(dec());
 }
 
-void StarData::setLongName(const QString &name)
+bool StarData::setLongName(const QString &name)
 {
     data.starName.longName = name;
+    return true;
 }
 
-void StarData::setBayerName(const QString &name)
+bool StarData::setBayerName(const QString &name)
 {
     data.starName.bayerName = name;
+    return true;
 }
 
 bool StarData::setRa(double value)

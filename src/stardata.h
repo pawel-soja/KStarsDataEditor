@@ -32,8 +32,8 @@ public:
     bool isVariability() const;
 
 public:
-    void setLongName(const QString &name);
-    void setBayerName(const QString &name);
+    bool setLongName(const QString &name);
+    bool setBayerName(const QString &name);
 
     bool setRa(double value);
     bool setRa(const QString &value);

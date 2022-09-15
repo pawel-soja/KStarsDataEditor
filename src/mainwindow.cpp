@@ -107,14 +107,20 @@ void MainWindow::on_tableWidget_itemChanged(QTableWidgetItem *item)
 {
     int row = item->row();
     bool changed = false;
+    auto &star = starDatabase.starDatas[row];
     switch(item->column())
     {
-    case 0:
-        changed = starDatabase.starDatas[row].setRa(item->text());
-        break;
-    case 1:
-        changed = starDatabase.starDatas[row].setDec(item->text());
-        break;
+    case 0:  changed = star.setRa(item->text()); break;
+    case 1:  changed = star.setDec(item->text()); break;
+    case 2:  changed = star.setMag(item->text().toDouble()); break;
+    case 3:  changed = star.setPmRa(item->text().toDouble()); break;
+    case 4:  changed = star.setPmDec(item->text().toDouble()); break;
+    case 5:  changed = star.setParallax(item->text().toDouble()); break;
+    case 6:  changed = star.setBvIndex(item->text().toDouble()); break;
+    case 7:  changed = star.setSpecType(item->text().toLatin1()); break;
+    case 8:  changed = star.setFlags(item->text().toInt()); break;
+    case 9:  changed = star.setBayerName(item->text().toLatin1()); break;
+    case 10: changed = star.setLongName(item->text().toLatin1()); break;
     }
 
     qDebug() << "changed" << changed;
