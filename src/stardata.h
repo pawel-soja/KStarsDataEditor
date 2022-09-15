@@ -1,8 +1,6 @@
 #pragma once
 
 #include <QDataStream>
-#include <QTextStream>
-
 struct StarData
 {
 public:
@@ -38,16 +36,12 @@ public:
     bool setDec(const QString &value);
 
 public:
-    void dump() const;
-
-public:
     static QString toString(double value, const QVector<QChar> &symbols = {0x00b0, '\'', '"'});
     static double fromString(const QString &value, const QVector<QChar> &symbols = {0x00b0, '\'', '"'}, bool *ok = nullptr);
 
 public:
     friend QDataStream &operator>>(QDataStream &stream, StarData &d);
     friend QDataStream &operator<<(QDataStream &stream, const StarData &d);
-    friend QTextStream &operator<<(QTextStream &stream, const StarData &d);
 
 public:
     struct Data
@@ -71,7 +65,6 @@ public:
 
             friend QDataStream &operator>>(QDataStream &stream, StarName &d);
             friend QDataStream &operator<<(QDataStream &stream, const StarName &d);
-            friend QTextStream &operator<<(QTextStream &stream, const StarName &d);
         } starName;
     };
 

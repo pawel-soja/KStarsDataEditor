@@ -12,11 +12,6 @@ QDataStream &operator<<(QDataStream &stream, const StarDatabase::Properties &d)
     return stream << d.faintmag << d.htm_level << d.t_MSpT;
 }
 
-QTextStream &operator<<(QTextStream &stream, const StarDatabase::Properties &d)
-{
-    return stream << endlw << "#" << d.faintmag << d.htm_level << d.t_MSpT << endlw;
-}
-
 void StarDatabase::setNamedStarsPath(const QString &path)
 {
     namedStarsPath = path;
@@ -101,31 +96,4 @@ bool StarDatabase::save()
     }
 
     return true;
-}
-
-bool StarDatabase::saveToCsv(const QString &fileName)
-{
-    QFile file(fileName);
-    if (!file.open(QFile::WriteOnly))
-    {
-        return false;
-    }
-
-    QTextStream stream(&file);
-
-    stream << qSetFieldWidth(16) << Qt::left;
-    stream << namedStars << properties;
-
-    stream << "# RA" << "Dec" << "dRA" << "dDec" << "parallax" << "HD" << "mag" << "bv_index" << "spec_type" << "flags" << "name" << endlw;
-    for (const auto &it: starDatas)
-    {
-        stream << it;
-    }
-
-    return true;
-}
-
-void StarDatabase::dump()
-{
-    //
 }

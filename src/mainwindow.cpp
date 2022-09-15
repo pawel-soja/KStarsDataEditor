@@ -53,7 +53,6 @@ void MainWindow::load()
 {
     starDatabase.clear();
     starDatabase.load();
-    //starDatabase.dump();
 
     ui->namedStarsDescription->setText(starDatabase.namedStars.description());
     ui->namedStarsVersion->setValue(starDatabase.namedStars.version());

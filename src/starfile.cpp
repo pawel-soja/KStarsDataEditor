@@ -1,15 +1,6 @@
 #include "starfile.h"
 #include "qt_stream.h"
 
-#include <QDebug>
-
-void StarFile::Header::dump() const
-{
-    qDebug() << "General text:" << QString((const char*)description);
-    qDebug() << "Version:" << version;
-}
-
-// StarFile::Header QDataStream
 QDataStream &operator>>(QDataStream &stream, StarFile::Header &d)
 {
     // Read the first 124 bytes of the binary file which contains a general text about the binary data.
@@ -35,14 +26,6 @@ QDataStream &operator<<(QDataStream &stream, const StarFile::Header &d)
     stream.setByteOrder(d.byteSwap ? QDataStream::LittleEndian : QDataStream::BigEndian);
     return stream << d.description << quint16(0x4B53) << d.version;
 }
-
-// StarFile::Header QTextStream
-QTextStream &operator<<(QTextStream &stream, const StarFile::Header &d)
-{
-    return stream << TAG << "Description:" << (const char*)d.description << endlw
-                  << TAG << "Version:" << d.version << endlw;
-}
-
 
 QString StarFile::DataElement::name() const
 {
@@ -84,15 +67,6 @@ void StarFile::DataElement::setScale(qint32 scale)
     mScale = scale;
 }
 
-void StarFile::DataElement::dump() const
-{
-    qDebug() << "Name:" << mName;
-    qDebug() << "Size:" << mSize;
-    qDebug() << "Type:" << mType;
-    qDebug() << "Scale:" << mScale;
-}
-
-// StarFile::DataElement QDataStream
 QDataStream &operator>>(QDataStream &stream, StarFile::DataElement &d)
 {
     return stream >> d.mName >> d.mSize >> d.mType >> d.mScale;
@@ -118,22 +92,6 @@ QDataStream &operator<<(QDataStream &stream, const StarFile::DataElement &d)
 QDataStream &operator<<(QDataStream &stream, const QVector<StarFile::DataElement> &d)
 {
     stream << quint16(d.size());
-    for (const auto &it: d)
-    {
-        stream << it;
-    }
-    return stream;
-}
-
-// StarFile::DataElement QTextStream
-QTextStream &operator<<(QTextStream &stream, const StarFile::DataElement &d)
-{
-    return stream << TAG << (const char*)d.mName << d.mSize << d.mType << d.mScale << endlw;
-}
-
-QTextStream &operator<<(QTextStream &stream, const QVector<StarFile::DataElement> &d)
-{
-    stream << endlw << TAG << "Name" << "Size" << "Type" << "Scale" << endlw;
     for (const auto &it: d)
     {
         stream << it;
@@ -169,13 +127,6 @@ void StarFile::IndexEntry::setOffset(quint32 value)
 void StarFile::IndexEntry::setCount(quint32 value)
 {
     mCount = value;
-}
-
-void StarFile::IndexEntry::dump() const
-{
-    qDebug() << "ID:" << mId;
-    qDebug() << "Offset:" << mOffset;
-    qDebug() << "Count:" << mCount;
 }
 
 QDataStream &operator>>(QDataStream &stream, StarFile::IndexEntry &d)
@@ -214,33 +165,12 @@ QDataStream &operator<<(QDataStream &stream, const QVector<StarFile::IndexEntry>
     return stream;
 }
 
-QTextStream &operator<<(QTextStream &stream, const StarFile::IndexEntry &d)
-{
-    return stream << TAG << d.mId << d.mOffset << d.mCount << endlw;
-}
-
-QTextStream &operator<<(QTextStream &stream, const QVector<StarFile::IndexEntry> &d)
-{
-    //stream << quint32(d.size());
-    stream << endlw << TAG << "ID" << "Offset" << "Count" << endlw;
-    for (const auto &it: d)
-    {
-        stream << it;
-    }
-    return stream;
-}
-
 QDataStream &operator>>(QDataStream &stream, StarFile &starFile)
 {
     return stream >> starFile.mHeader >> starFile.mDataElements >> starFile.mIndexEntries;
 }
 
 QDataStream &operator<<(QDataStream &stream, const StarFile &starFile)
-{
-    return stream << starFile.mHeader << starFile.mDataElements << starFile.mIndexEntries;
-}
-
-QTextStream &operator<<(QTextStream &stream, const StarFile &starFile)
 {
     return stream << starFile.mHeader << starFile.mDataElements << starFile.mIndexEntries;
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <QDataStream>
-#include <QTextStream>
 
 #include "starfile.h"
 #include "stardata.h"
@@ -17,9 +16,7 @@ public:
 
         friend QDataStream &operator>>(QDataStream &stream, Properties &d);
         friend QDataStream &operator<<(QDataStream &stream, const Properties &d);
-        friend QTextStream &operator<<(QTextStream &stream, const Properties &d);
     };
-
 
 public:
     void setNamedStarsPath(const QString &path);
@@ -30,11 +27,6 @@ public:
 
     bool load();
     bool save();
-
-    bool saveToCsv(const QString &fileName = "out.csv");
-
-public:
-    void dump();
 
 public:
     QString namedStarsPath;

@@ -21,25 +21,6 @@ StarData::Data::StarName &StarData::rawName()
     return data.starName;
 }
 
-void StarData::dump() const
-{
-    qDebug() << "RA:" << data.RA;
-    qDebug() << "Dec:" << data.Dec;
-    qDebug() << "dRA:" << data.dRA;
-    qDebug() << "dDec:" << data.dDec;
-    qDebug() << "parallax:" << data.parallax;
-    qDebug() << "HD:" << data.HD;
-    qDebug() << "mag:" << data.mag;
-    qDebug() << "bv_index" << data.bv_index;
-    /* ... */
-
-    if (isNamedStar())
-    {
-        qDebug() << "bayerName:" << bayerName();
-        qDebug() << "longName:" << longName();
-    }
-}
-
 bool StarData::isNamedStar() const
 {
     return data.flags & 0x01;
@@ -204,28 +185,12 @@ QDataStream &operator<<(QDataStream &stream, const StarData &d)
     return stream;
 }
 
-QTextStream &operator<<(QTextStream &stream, const StarData &d)
-{
-    stream << d.raAsString() << d.decAsString()
-           << d.pmRa() << d.pmDec()
-           << d.data.parallax << d.data.HD
-           << d.mag() << d.data.bv_index
-           << d.data.spec_type << d.data.flags
-           << d.longName() << endlw;
-    return stream;
-}
-
 QDataStream &operator>>(QDataStream &stream, StarData::Data::StarName &d)
 {
     return stream >> d.bayerName >> d.longName;
 }
 
 QDataStream &operator<<(QDataStream &stream, const StarData::Data::StarName &d)
-{
-    return stream << d.bayerName << d.longName;
-}
-
-QTextStream &operator<<(QTextStream &stream, const StarData::Data::StarName &d)
 {
     return stream << d.bayerName << d.longName;
 }

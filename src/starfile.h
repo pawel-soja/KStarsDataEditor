@@ -14,13 +14,8 @@ public:
         quint8 version = 0;
 
     public:
-        void dump() const;
-
-    public:
         friend QDataStream &operator>>(QDataStream &stream, Header &d);
         friend QDataStream &operator<<(QDataStream &stream, const Header &d);
-
-        friend QTextStream &operator<<(QTextStream &stream, const Header &d);
     };
 
     class DataElement
@@ -38,17 +33,11 @@ public:
         void setScale(qint32 scale);
 
     public:
-        void dump() const;
-
-    public:
         friend QDataStream &operator>>(QDataStream &stream, DataElement &d);
         friend QDataStream &operator>>(QDataStream &stream, QVector<DataElement> &d);
 
         friend QDataStream &operator<<(QDataStream &stream, const DataElement &d);
         friend QDataStream &operator<<(QDataStream &stream, const QVector<DataElement> &d);
-
-        friend QTextStream &operator<<(QTextStream &stream, const DataElement &d);
-        friend QTextStream &operator<<(QTextStream &stream, const QVector<DataElement> &d);
 
     protected:
         quint8 mName[10] = "";  /**< Field name (eg. RA) */
@@ -70,17 +59,11 @@ public:
         void setCount(quint32 value);
 
     public:
-        void dump() const;
-
-    public:
         friend QDataStream &operator>>(QDataStream &stream, IndexEntry &d);
         friend QDataStream &operator>>(QDataStream &stream, QVector<IndexEntry> &d);
 
         friend QDataStream &operator<<(QDataStream &stream, const IndexEntry &d);
         friend QDataStream &operator<<(QDataStream &stream, const QVector<IndexEntry> &d);
-
-        friend QTextStream &operator<<(QTextStream &stream, const IndexEntry &d);
-        friend QTextStream &operator<<(QTextStream &stream, const QVector<IndexEntry> &d);
 
     protected:
         quint32 mId = 0;
@@ -99,7 +82,6 @@ public:
 public:
     friend QDataStream &operator>>(QDataStream &stream, StarFile &starFile);
     friend QDataStream &operator<<(QDataStream &stream, const StarFile &starFile);
-    friend QTextStream &operator<<(QTextStream &stream, const StarFile &starFile);
 
 public:
     Header mHeader;
