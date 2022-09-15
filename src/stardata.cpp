@@ -154,7 +154,7 @@ bool StarData::setBayerName(const QString &name)
 
 bool StarData::setRa(double value)
 {
-    data.RA = value * 1e6;
+    data.RA = value * raScale();
     return true;
 }
 
