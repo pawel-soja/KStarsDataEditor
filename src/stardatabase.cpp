@@ -1,6 +1,7 @@
 #include "stardatabase.h"
 #include "qt_stream.h"
 #include <QFile>
+#include <QDebug>
 
 QDataStream &operator>>(QDataStream &stream, StarDatabase::Properties &d)
 {

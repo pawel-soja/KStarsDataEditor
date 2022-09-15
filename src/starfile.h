@@ -2,7 +2,6 @@
 
 #include <QByteArray>
 #include <QDataStream>
-#include <QDebug>
 
 class StarFile
 {

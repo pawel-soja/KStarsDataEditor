@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include <QFile>
+#include <QDebug>
 
 static const QString namedStarsPath = "/usr/share/kstars/namedstars.dat";
 static const QString starsNamedPath = "/usr/share/kstars/starnames.dat";
